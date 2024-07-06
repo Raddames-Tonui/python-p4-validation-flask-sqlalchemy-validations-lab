@@ -42,7 +42,7 @@ class Post(db.Model):
 
     # Add validators  
     @validates('content', 'summary')
-    def validate_lenght(self, key string):
+    def validate_lenght(self, key, string):
         if (key == 'contnet'):
             if len(string) < 250:
                 raise ValueError("Post content must be greater than or equal 250 characters long.")
@@ -51,6 +51,7 @@ class Post(db.Model):
                 raise ValueError("Post summary must be less than or equal to 250 characters long.")
         return string
     
+    # Add clickbait validator
     @validates('title')
     def validate_title(self, key, title):
         if not title:
@@ -60,8 +61,9 @@ class Post(db.Model):
             raise ValueError("No clickbait found")
         return title
 
+
     @validates(category)
-    def validate_category(self,key, category)
+    def validate_category(self, key, category):
         if category != "Fiction" or category != 'Non-Fiction':
             raise ValueError("Category must be Fiction or Non-Fiction.")
         return category
